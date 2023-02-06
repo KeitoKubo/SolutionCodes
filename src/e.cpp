@@ -106,6 +106,8 @@ bool compare_by_b(pair<int, int> a, pair<int, int> b) {
 
 
 int main() {
+	//(void)scanf("%d",& );
+	//(void)scanf("%d%d",& ,& );
 	
 
 	return 0;

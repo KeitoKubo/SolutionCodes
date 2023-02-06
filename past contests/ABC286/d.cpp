@@ -103,12 +103,33 @@ bool compare_by_b(pair<int, int> a, pair<int, int> b) {
 }
 
 //---------------------------------------------------
-
+const int max_n = 52;
+int a[max_n],b[max_n];
+int dp[10005];
+int dp_2[10005];
 
 int main() {
 	//(void)scanf("%d",& );
 	//(void)scanf("%d%d",& ,& );
+  int n,x;
+  cin>>n>>x;
+	rep(i,n) (void)scanf("%d%d",&a[i],&b[i]);
   
+	dp[0]=1;
+	repa(i,x) dp[i]=0;
+	rep(i,n){
+		rep(l,x+1) dp_2[l]=dp[l];
+		repa(j,b[i]){
+			int value = a[i]*j;
+			for(int k=0;k<=x-value;k++){
+				if(dp[k]==1) dp_2[k+value]=1;
+			}
+		}
+		rep(l,x+1) dp[l]=dp_2[l];
+	}
+
+	if(dp[x]==1) cout<<"Yes"<<endl;
+	else cout<<"No"<<endl;
 
 	return 0;
 }
