@@ -108,7 +108,31 @@ bool compare_by_b(pair<int, int> a, pair<int, int> b) {
 int main() {
 	//(void)scanf("%d",& );
 	//(void)scanf("%d%d",& ,& );
-  
+	string s, t;
+	cin >> s >> t;
+
+	int ls = s.length(), lt = t.length();
+
+	int max_front = lt, mini_back = lt;
+	rep(i, lt) {
+		if (s[i] != '?' && t[i] != '?' && s[i] != t[i]) {
+			max_front = i; break;
+		}
+	}
+	int count = 0;
+	rep(i,lt) {
+		if (s[ls-1-i] != '?' && t[lt-1-i] != '?' && s[ls - 1 - i] != t[lt - 1 - i]) {
+			mini_back = count; break;
+		}
+		count++;
+	}
+
+
+	rep(i, lt+1) {
+		int now_front = i, now_back = lt - i;
+		if (now_front <= max_front && now_back <= mini_back) cout << "Yes" << endl;
+		else cout << "No" << endl;
+	}
 
 	return 0;
 }

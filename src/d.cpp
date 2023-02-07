@@ -103,10 +103,46 @@ bool compare_by_b(pair<int, int> a, pair<int, int> b) {
 }
 
 //---------------------------------------------------
+const int max_n = 3e6;
+int isprime[max_n];
+vector<ll> primes;
 
+void prime(){
+	repa(i,max_n) isprime[i]=1;
+	for(int i=2;i<=max_n;i++){
+		if(isprime[i]){
+			primes.push_back((ll)i);
+			for(int j=i*2;j<=max_n;j+=i){
+				isprime[j]=0;
+			}
+		}
+	}
+}
 
 int main() {
-	
+	//(void)scanf("%d",& );
+	//(void)scanf("%d%d",& ,& );
+  int t; cin>>t;
+	(void)prime();
+	rep(i,t){
+		ll x; cin>>x;
+		rep(j,primes.size()){
+			if(x%primes[j]==0){
+				ll xx = x/primes[j];
+				if(xx%primes[j]==0){
+					printf("%d %d\n",primes[j],xx/primes[j]);
+				}
+				else{
+					for(int k=j+1;k<primes.size();k++){
+						if(xx%primes[k]==0){
+							printf("%d %d\n",primes[k],primes[j]);
+						}
+					}
+				}
+			}
+		}
+	}
+
 
 	return 0;
 }
