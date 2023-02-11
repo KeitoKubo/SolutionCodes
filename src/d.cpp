@@ -103,46 +103,39 @@ bool compare_by_b(pair<int, int> a, pair<int, int> b) {
 }
 
 //---------------------------------------------------
-const int max_n = 3e6;
-int isprime[max_n];
-vector<ll> primes;
-
-void prime(){
-	repa(i,max_n) isprime[i]=1;
-	for(int i=2;i<=max_n;i++){
-		if(isprime[i]){
-			primes.push_back((ll)i);
-			for(int j=i*2;j<=max_n;j+=i){
-				isprime[j]=0;
-			}
-		}
-	}
-}
+const int max_n = 1e5 + 5;
+int b[max_n];
+int a[12];
+int n,m,x;
+int dp[max_n];
 
 int main() {
 	//(void)scanf("%d",& );
 	//(void)scanf("%d%d",& ,& );
-  int t; cin>>t;
-	(void)prime();
-	rep(i,t){
-		ll x; cin>>x;
-		rep(j,primes.size()){
-			if(x%primes[j]==0){
-				ll xx = x/primes[j];
-				if(xx%primes[j]==0){
-					printf("%d %d\n",primes[j],xx/primes[j]);
-				}
-				else{
-					for(int k=j+1;k<primes.size();k++){
-						if(xx%primes[k]==0){
-							printf("%d %d\n",primes[k],primes[j]);
-						}
-					}
-				}
-			}
+	//Ai
+  cin>>n;
+	rep(i,n){
+		(void)scanf("%d",&a[i]); dp[a[i]]=1;
+	}
+	//餅
+	cin>>m;
+	rep(i,m){
+		int xx;
+		(void)scanf("%d",&xx);
+		b[xx]=1; dp[xx]=0;
+	}
+	cin>>x;
+
+  for(int i=0;i<x;i++){
+		if(dp[i]==1){
+			rep(j,n){
+			if(i+a[j]<=x && b[i+a[j]]!=1) dp[i+a[j]]=1;
+		}
 		}
 	}
 
+	if(dp[x]) cout<<"Yes"<<endl;
+	else cout<<"No"<<endl;
 
 	return 0;
 }

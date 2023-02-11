@@ -103,25 +103,39 @@ bool compare_by_b(pair<int, int> a, pair<int, int> b) {
 }
 
 //---------------------------------------------------
-
+int n,m;
+vector<int> s[12];
 
 int main() {
 	//(void)scanf("%d",& );
 	//(void)scanf("%d%d",& ,& );
-  int n; ll a,b; string s;
-	cin>>n>>a>>b>>s;
-
-  int l = s.length();
-	ll ans=infl;
-	rep(i,l){
-		string s_moved = s.substr(0,i);
-		string s_part = s.substr(i);
-		string s_merged = s_part + s_moved;
-		ll sum=a*(ll)i;
-		for(int j=0;j<=(n-1)/2;j++){
-       if(s_merged[j] != s_merged[l-1-j]) sum += b;
+  cin>>n>>m;
+	rep(i,m){
+		int c; scanf("%d",&c);
+		rep(j,c){
+			int a;scanf("%d",&a);s[i].push_back(a);
 		}
-		ans = min(ans,sum);
+	}
+
+  int ans=0;
+	for(int i=1;i<(int)pow(2,m);i++){
+		int used[11];
+		rep(i,11) used[i]=0;
+		int x=i;
+		int index=m-1;
+		while(x>0){
+			if(x>=(int)pow(2,index)){
+				vi vec = s[index];
+				x -= (int)pow(2,index);
+				rep(k,vec.size()){
+					used[vec[k]]=1;
+				}
+			}
+			index--;
+		}
+		int flag=1;
+		repa(i,n) if(!used[i]) flag=0;
+		if(flag) ans++;
 	}
 
 	cout<<ans<<endl;

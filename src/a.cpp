@@ -108,7 +108,13 @@ bool compare_by_b(pair<int, int> a, pair<int, int> b) {
 int main() {
 	//(void)scanf("%d",& );
 	//(void)scanf("%d%d",& ,& );
-  
+  string s; cin>>s;
+	string ans="";
+	rep(i,s.length()){
+		if(s[i]=='0'){ans+="1";}
+		else ans+='0';
+	}
+	cout<<ans<<endl;
 
 	return 0;
 }
