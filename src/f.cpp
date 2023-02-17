@@ -245,17 +245,14 @@ int main() {
 			if (btoa_x >= count_x) {
 				count_x = 0; btoa_x -= count_x;
 			}
-			else {
-				btoa_x = 0; count_x -= btoa_x;
-			}
 			ll remain = 1000000 - 1 - 1 - 2 * btoa_x - 2 * count_x;
-			vec_x.push_back(mod_x);
 			repl(i, btoa_x) {
-				vec_x.push_back(a); vec_x.push_back(b);
-			}
-			repl(i, count_x) {
 				vec_x.push_back(b); vec_x.push_back(a);
 			}
+			repl(i, count_x) {
+				vec_x.push_back(a); vec_x.push_back(b);
+			}
+			vec_x.push_back(mod_x);
 			repl(i, remain) {
 				vec_x.push_back(b);
 			}
@@ -270,17 +267,14 @@ int main() {
 			if (btoa_y >= count_y) {
 				count_y = 0; btoa_y -= count_y;
 			}
-			else {
-				btoa_y = 0; count_y -= btoa_y;
-			}
 			ll remain = 1000000 - 1 - 1 - 2 * btoa_y - 2 * count_y;
-			vec_y.push_back(count_y);
 			repl(i, btoa_y) {
-				vec_y.push_back(c); vec_y.push_back(d);
-			}
-			repl(i, count_y) {
 				vec_y.push_back(d); vec_y.push_back(c);
 			}
+			repl(i, count_y) {
+				vec_y.push_back(c); vec_y.push_back(d);
+			}
+			vec_y.push_back(count_y);
 			repl(i, remain) {
 				vec_y.push_back(d);
 			}
