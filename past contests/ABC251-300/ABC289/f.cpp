@@ -105,14 +105,13 @@ bool compare_by_b(pair<int, int> a, pair<int, int> b) {
 
 //---------------------------------------------------
 const ll maxi = 990000;
+vector<ll> vec_x, vec_y;
 
 int main() {
-	//(void)scanf("%d",& );
-	//(void)scanf("%d%d",& ,& );
 	ll sx, sy, tx, ty; cin >> sx >> sy >> tx >> ty;
 	ll a, b, c, d; cin >> a >> b >> c >> d;
 
-	vector<ll> vec_x, vec_y;
+	//偶数回移動
 	int zeroflag_x = 0, zeroflag_y = 0;
 	if ((sx + tx) % 2 == 1 || ((sy + ty) % 2 == 1)) {
 		cout << "No" << endl; return 0;
@@ -121,11 +120,11 @@ int main() {
 	if (b == a) {
 		if (tx == sx) {
 			zeroflag_x = 1;
-			repl(i, maxi) vec_x.push_back(b);
+			repl(i, maxi) vec_x.push_back(a);
 		}
-		else if ((tx + sx) == 2 * b) {
+		else if ((tx + sx) == 2 * a) {
 			zeroflag_x = 2;
-			repl(i, maxi - 1) vec_x.push_back(b);
+			repl(i, maxi - 1) vec_x.push_back(a);
 		}
 		else {
 			cout << "No" << endl; return 0;
@@ -148,10 +147,10 @@ int main() {
 	if ((zeroflag_x == 0 || zeroflag_x == 1) && (zeroflag_y == 0 || zeroflag_y == 1)) {//偶数回操作
 		if (zeroflag_x == 0) {
 			if (tx >= sx) {
-				ll btoa_x = (tx - sx) / (2 * (b - a));
+				ll move_x = (tx - sx) / (2 * (b - a));
 				ll mod_x = (tx - sx) % (2 * (b - a)); mod_x /= 2;
-				ll remain_x = maxi - 2 - 2 * btoa_x;
-				repl(i, btoa_x) {
+				ll remain_x = maxi - 2 - 2 * move_x;
+				repl(i, move_x) {
 					vec_x.push_back(a); vec_x.push_back(b);
 				}
 				vec_x.push_back(b - mod_x);
@@ -161,10 +160,10 @@ int main() {
 				}
 			}
 			else {
-				ll btoa_x = (sx - tx) / (2 * (b - a));
+				ll move_x = (sx - tx) / (2 * (b - a));
 				ll mod_x = (sx - tx) % (2 * (b - a)); mod_x /= 2;
-				ll remain_x = maxi - 2 - 2 * btoa_x;
-				repl(i, btoa_x) {
+				ll remain_x = maxi - 2 - 2 * move_x;
+				repl(i, move_x) {
 					vec_x.push_back(b); vec_x.push_back(a);
 				}
 				vec_x.push_back(b);
@@ -189,10 +188,10 @@ int main() {
 				}
 			}
 			else {
-				ll btoa_y = (sy - ty) / (2 * (d - c));
+				ll move_y = (sy - ty) / (2 * (d - c));
 				ll mod_y = (sy - ty) % (2 * (d - c)); mod_y /= 2;
-				ll remain = maxi - 2 - 2 * btoa_y;
-				repl(i, btoa_y) {
+				ll remain = maxi - 2 - 2 * move_y;
+				repl(i, move_y) {
 					vec_y.push_back(d); vec_y.push_back(c);
 				}
 				vec_y.push_back(d);
@@ -205,15 +204,15 @@ int main() {
 	}
 	else if ((zeroflag_x == 0 || zeroflag_x == 2) && (zeroflag_y == 0 || zeroflag_y == 2)) {//奇数回操作
 		if (zeroflag_x == 0) {
-			ll btoa_x = (tx + sx) / (2 * (b - a));
+			ll move_x = (tx + sx) / (2 * (b - a));
 			ll mod_x = (tx + sx) % (2 * (b - a)); mod_x /= 2;
 			ll count_x = 0;
 			while (mod_x < a) {
 				mod_x += b - a; count_x += (ll)1;
 			}
-			ll remain = maxi - 1 - 1 - 2 * btoa_x - 2 * count_x;
+			ll remain = maxi - 1 - 1 - 2 * move_x - 2 * count_x;
 			vec_x.push_back(mod_x);
-			repl(i, btoa_x) {
+			repl(i, move_x) {
 				vec_x.push_back(a); vec_x.push_back(b);
 			}
 			repl(i, count_x) {
@@ -224,15 +223,15 @@ int main() {
 			}
 		}
 		if (zeroflag_y == 0) {
-			ll btoa_y = (ty + sy) / (2 * (d - c));
+			ll move_y = (ty + sy) / (2 * (d - c));
 			ll mod_y = (ty + sy) % (2 * (d - c)); mod_y /= 2;
 			ll count_y = 0;
 			while (mod_y < c) {
 				mod_y += d - c; count_y += (ll)1;
 			}
-			ll remain = maxi - 1 - 1 - 2 * btoa_y - 2 * count_y;
+			ll remain = maxi - 1 - 1 - 2 * move_y - 2 * count_y;
 			vec_y.push_back(mod_y);
-			repl(i, btoa_y) {
+			repl(i, move_y) {
 				vec_y.push_back(c); vec_y.push_back(d);
 			}
 			repl(i, count_y) {
