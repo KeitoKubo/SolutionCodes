@@ -42,6 +42,7 @@ typedef queue<int> qi;
 #define rep(i,n) for(int i=0;i<(int)n;i++)
 #define repa(i,n) for(int i=1;i<=(int)n;i++)
 #define irep(i,n) for(int i=(int)n-1;i>=0;i--)
+#define repl(i,n) for(ll i=0;i<(ll)n;i+=(ll)1)
 
 //Union Find Tree
 class DisjointSet {
@@ -103,12 +104,70 @@ bool compare_by_b(pair<int, int> a, pair<int, int> b) {
 }
 
 //---------------------------------------------------
+const int max_n = 1005;
 
+void solve() {
+	int n, m;
+	vi edge[max_n];
+	vi group_depth_1[max_n],group_depth_n[max_n]; //1を始点、nを始点をしたときの、深さごとのnodeの集合
+	bool checked[max_n];
+	int color[max_n];
+	int status_0[max_n], status_n[max_n];
+	int depth[max_n];
+	int depth_1_to_n;
+
+	cin >> n >> m;
+	rep(i, n) {
+		int x; scanf("%d", &x); color[i] = x;
+	}
+	rep(i, m) {
+		int a, b; scanf("%d%d", &a, &b);
+		--a; --b;
+		edge[a].push_back(b); edge[b].push_back(a);
+	}
+
+	rep(i, n) { checked[i] = 0; depth[i] = 0; status_0[i] = 0; }
+	qi Q; Q.push(0);
+	while (!Q.empty()) {
+		int _node = Q.front(); Q.pop();
+		checked[_node] = 1;
+		int _depth = depth[_node];
+		rep(i, edge[_node].size()) {
+			int next_node = edge[_node][i];
+			if (!checked[next_node]) {
+				status_0[next_node] = status_0[_node] + color[next_node];
+				depth[next_node] = depth[_node] + 1;
+				group_depth_1[depth[next_node]].push_back(next_node);
+				Q.push(next_node);
+			}
+		}
+	}
+
+	if (!checked[n - 1]) { cout << -1 << endl; } //連結でない場合
+
+	rep(i, n) { checked[i] = 0; depth[i] = 0; }
+	qi Q; Q.push(n - 1);
+	while (!Q.empty()) {
+		int _node = Q.front(); Q.pop();
+		checked[_node] = 1;
+		int _depth = depth[_node];
+		rep(i, edge[_node].size()) {
+			int next_node = edge[_node][i];
+			if (!checked[next_node]) {
+				depth[next_node] = depth[_node] + 1;
+				group_depth_n[depth[next_node]].push_back(next_node);
+				Q.push(next_node);
+			}
+		}
+	}
+
+	depth_1_to_n = depth[0];
+}
 
 int main() {
-	//(void)scanf("%d",& );
-	//(void)scanf("%d%d",& ,& );
-	
+	int T; cin >> T;
+	rep(i, T) solve();
+
 
 	return 0;
 }
