@@ -7,7 +7,6 @@ using namespace std;
 #define infi (1<<20)
 
 struct edge { int to, cap, rev; };
-
 vector<edge> G[MAX_V];
 bool used[MAX_V];
 
