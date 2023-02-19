@@ -7,10 +7,10 @@ using namespace std;
 
 const int MAX_V = 50;
 
-struct edge{int to,cap,rev;};
+struct edge{int to,cap,rev;}; //辺を記述 to:行き先,cap:容量,rev:逆辺の位置
 int level[MAX_V]; //sからの距離
 int iter[MAX_V]; //どこまで調べ終わったか
-vector<edge> G[MAX_V];
+vector<edge> G[MAX_V];//辺の隣接リスト表現
 
 void add_node(int from, int to, int cap){
     edge e = {to,cap,G[to].size()};

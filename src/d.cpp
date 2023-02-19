@@ -112,30 +112,8 @@ int dp[max_n];
 int main() {
 	//(void)scanf("%d",& );
 	//(void)scanf("%d%d",& ,& );
-	//Ai
-  cin>>n;
-	rep(i,n){
-		(void)scanf("%d",&a[i]); dp[a[i]]=1;
-	}
-	//餅
-	cin>>m;
-	rep(i,m){
-		int xx;
-		(void)scanf("%d",&xx);
-		b[xx]=1; dp[xx]=0;
-	}
-	cin>>x;
-
-  for(int i=0;i<x;i++){
-		if(dp[i]==1){
-			rep(j,n){
-			if(i+a[j]<=x && b[i+a[j]]!=1) dp[i+a[j]]=1;
-		}
-		}
-	}
-
-	if(dp[x]) cout<<"Yes"<<endl;
-	else cout<<"No"<<endl;
+	
+  
 
 	return 0;
 }

@@ -103,42 +103,12 @@ bool compare_by_b(pair<int, int> a, pair<int, int> b) {
 }
 
 //---------------------------------------------------
-int n,m;
-vector<int> s[12];
+
 
 int main() {
 	//(void)scanf("%d",& );
 	//(void)scanf("%d%d",& ,& );
-  cin>>n>>m;
-	rep(i,m){
-		int c; scanf("%d",&c);
-		rep(j,c){
-			int a;scanf("%d",&a);s[i].push_back(a);
-		}
-	}
-
-  int ans=0;
-	for(int i=1;i<(int)pow(2,m);i++){
-		int used[11];
-		rep(i,11) used[i]=0;
-		int x=i;
-		int index=m-1;
-		while(x>0){
-			if(x>=(int)pow(2,index)){
-				vi vec = s[index];
-				x -= (int)pow(2,index);
-				rep(k,vec.size()){
-					used[vec[k]]=1;
-				}
-			}
-			index--;
-		}
-		int flag=1;
-		repa(i,n) if(!used[i]) flag=0;
-		if(flag) ans++;
-	}
-
-	cout<<ans<<endl;
+  
 
 	return 0;
 }

@@ -103,48 +103,10 @@ bool compare_by_b(pair<int, int> a, pair<int, int> b) {
 }
 
 //---------------------------------------------------
-int a[102];
+
 
 int main() {
-	//(void)scanf("%d",& );
-	//(void)scanf("%d%d",& ,& );
-  int n,m; cin>>n>>m;
-	vi vec;
-	rep(i,m){
-		int x; scanf("%d",&x); a[x]=1;
-	}
 	
-	queue<pair<int,int>> Q;
-	int pos=1;
-	int num=1;
-	while(pos<=n){
-		if(a[pos]){
-			pos++;
-		}
-		else{
-			Q.push(make_pair(num,pos));
-			pos++;
-			num=pos;
-		}
-	}
-
-	vi ans;
-	while(!Q.empty()){
-		pii P = Q.front(); Q.pop();
-		for(int i=P.second;i>=P.first;i--){
-			ans.push_back(i);
-		}
-	}
-
-	rep(i,ans.size()){
-		if(i==ans.size()-1){
-			cout<<ans[i]<<endl;
-		}
-		else{
-			cout<<ans[i]<<" ";
-		}
-	}
-
 	return 0;
 }
 
