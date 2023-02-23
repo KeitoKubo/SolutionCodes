@@ -113,7 +113,7 @@ void solve(ll n, ll d, ll k) {
 	ll l = lcm(n, d); //最大公約数
 	ll r = (n / l) * d; //最小公倍数
 
-	if (l == 1) { //互いにそな場合
+	if (l == 1) { //互いに素な場合
 		cout << (d * (k-1)) % n << endl;
 	}
 	else {
