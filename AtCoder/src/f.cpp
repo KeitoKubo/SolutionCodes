@@ -42,7 +42,6 @@ typedef queue<int> qi;
 #define rep(i,n) for(int i=0;i<(int)n;i++)
 #define repa(i,n) for(int i=1;i<=(int)n;i++)
 #define irep(i,n) for(int i=(int)n-1;i>=0;i--)
-#define repl(i,n) for(ll i=0;i<(ll)n;i+=(ll)1)
 
 //Union Find Tree
 class DisjointSet {
@@ -109,6 +108,7 @@ bool compare_by_b(pair<int, int> a, pair<int, int> b) {
 int main() {
 	//(void)scanf("%d",& );
 	//(void)scanf("%d%d",& ,& );
+	
 	
 
 	return 0;

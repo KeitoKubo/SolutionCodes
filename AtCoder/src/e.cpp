@@ -42,7 +42,6 @@ typedef queue<int> qi;
 #define rep(i,n) for(int i=0;i<(int)n;i++)
 #define repa(i,n) for(int i=1;i<=(int)n;i++)
 #define irep(i,n) for(int i=(int)n-1;i>=0;i--)
-#define repl(i,n) for(ll i=0;i<(ll)n;i+=(ll)1)
 
 //Union Find Tree
 class DisjointSet {
@@ -104,37 +103,13 @@ bool compare_by_b(pair<int, int> a, pair<int, int> b) {
 }
 
 //---------------------------------------------------
-const int max_n = 200002;
-vector<ll> dist[max_n];
-ll n;
+
 
 int main() {
 	//(void)scanf("%d",& );
 	//(void)scanf("%d%d",& ,& );
-	cin >> n;
-	int maxi = -1;
-	repl(i, n) {
-		int x; (void)scanf("%d", &x); maxi = max(maxi, x);
-		int d = min(i + 1, n - i);
-		dist[x].push_back(d);
-	}
-
-	ll p = 0;
-	repa(i, maxi) {
-		if (dist[i].size()>1) {
-			sort(dist[i].begin(), dist[i].end());
-			rep(j, dist[i].size()) {
-				p += (ll)(dist[i].size() - j - 1) * dist[i][j];
-			}
-		}
-	}
-
-	ll sum = 0;
-	for (ll l = 2; l <= (ll)n; l += (ll)1) {
-		sum += (l / 2) * ((ll)n + 1 - l);
-	}
-
-	cout << sum - p << endl;
+	
+	
 
 	return 0;
 }

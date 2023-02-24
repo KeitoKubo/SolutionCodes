@@ -108,33 +108,8 @@ bool compare_by_b(pair<int, int> a, pair<int, int> b) {
 int main() {
 	//(void)scanf("%d",& );
 	//(void)scanf("%d%d",& ,& );
-	int n, k;
-	vector<int> v;
-	cin >> n >> k;
-	rep(i, n) {
-		int x; (void)scanf("%d", &x); v.push_back(x);
-	}
-	sort(v.begin(), v.end());
-
-	int cur = -1;
-	rep(i, v.size()) {
-		if (v[i] == cur) {
-			continue;
-		}
-		else if (v[i] == cur + 1) {
-			cur++;
-		}
-		else {
-			break;
-		}
-	}
 	
-	if (cur == -1) {//0が存在しない
-		std::cout << 0 << endl;
-	}
-	else { //0...curまでは連続で存在している
-		std::cout << min(k, cur+1) << endl;
-	}
+	
 
 	return 0;
 }

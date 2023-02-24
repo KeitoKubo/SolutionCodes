@@ -103,21 +103,13 @@ bool compare_by_b(pair<int, int> a, pair<int, int> b) {
 }
 
 //---------------------------------------------------
-const int max_n = 105;
-int a[max_n];
+
 
 int main() {
 	//(void)scanf("%d",& );
 	//(void)scanf("%d%d",& ,& );
-	int n, m; cin >> n >> m;
-	repa(i, n) {
-		cin >> a[i];
-	}
-	int ans = 0;
-	rep(i, m) {
-		int x; cin >> x; ans += a[x];
-	}
-	cout << ans << endl;
+	
+	
 
 	return 0;
 }

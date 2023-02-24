@@ -104,36 +104,12 @@ bool compare_by_b(pair<int, int> a, pair<int, int> b) {
 
 //---------------------------------------------------
 
-ll lcm(ll x, ll y) {
-	if (x % y == 0) return y;
-	else return lcm(y, x % y);
-}
-
-void solve(ll n, ll d, ll k) {
-	ll l = lcm(n, d); //最大公約数
-	ll r = (n / l) * d; //最小公倍数
-
-	if (l == 1) { //互いに素な場合
-		cout << (d * (k-1)) % n << endl;
-	}
-	else {
-		ll p = r / d; //iiiの操作が行われてから、次のiiiの操作が行われるまでの回数
-		ll q = (k - 1) / p;
-		ll _mod = (k - 1) % p;
-		ll s = (d * _mod) % n;
-		cout << q + s << endl;
-	}
-}
 
 int main() {
 	//(void)scanf("%d",& );
 	//(void)scanf("%d%d",& ,& );
-	int t; cin >> t;
-	rep(i, t) {
-		int n, d, k; (void)scanf("%d%d%d", &n, &d, &k);
-		solve(n, d, k);
-	}
-
+	
+	
 
 	return 0;
 }
