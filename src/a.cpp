@@ -2,8 +2,7 @@
 #include <iostream>                         // cout, endl, cin
 #include <cstdio>                           // printf, scanf
 #include <string>                           // string, to_string, stoi
-#include <algorithm>                        // min, max, swap, lower_bound, upper_bound
-// & stable_sort, sort, reverse
+#include <algorithm>                        // min, max, swap, lower_bound, upper_bound, stable_sort, sort, reverse
 #include <cmath>                            //sin(rad),cos,tan, abs, pow, sqrt, cbrt,  exp, log, log10, log2
 #include <utility>                          // pair, make_pair
 #include <map>                              // map
@@ -24,6 +23,8 @@ using namespace std;
 typedef long long ll;
 typedef unsigned long long ull;
 typedef vector<int> vi;
+typedef vector<vector<int>> vvi;
+typedef vector<vector<vector<int>>> vvvi;
 typedef vector<string> vs;
 typedef pair<int, int> pii;
 typedef pair<string, int> psi;
