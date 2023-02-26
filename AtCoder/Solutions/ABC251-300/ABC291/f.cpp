@@ -104,14 +104,71 @@ bool compare_by_b(pair<int, int> a, pair<int, int> b) {
 }
 
 //---------------------------------------------------
-const int MX = 2e5 + 2;
+const int MX = 1e5 + 2;
+int fdp[MX], bdp[MX];
+vector<string> s;
+int n, m;
 
 
 int main() {
 	//(void)scanf("%d",& );
 	//(void)scanf("%d%d",& ,& );
 
+	//1-indexed
+	cin >> n >> m;
+	rep(i, n) {
+		string str; cin >> str; s.push_back(str);
+	}
+	repa(i, n) { fdp[i] = bdp[i] = infi; }
+	fdp[1] = 0; bdp[n] = 0;
 
+	//fdp
+	repa(i, n) {
+		if (fdp[i] != infi) {
+			string str = s[i - 1];
+			rep(j, str.length()) {
+				if (str[j] == '1' && i+j+1 <= n) {
+					fdp[i + j + 1] = min(fdp[i + j + 1], fdp[i] + 1);
+				}
+			}
+		}
+	}
+
+	//bdp
+	for (int i = n; i >= 1; i--) {
+		if (bdp[i] != infi) {
+			for (int nxt = i - 1; nxt >= max(1, i - m); nxt--) {
+				string str = s[nxt - 1];
+				if (str[i - nxt - 1] == '1') {
+					bdp[nxt] = min(bdp[nxt], bdp[i] + 1);
+				}
+			}
+		}
+	}
+
+	vi v;
+	for (int k = 2; k < n; k++) {
+		int ans = infi;
+		for (int i = max(1, k - m + 1); i < k; i++) {
+			if (fdp[i] != infi) {
+				string str = s[i - 1];
+				for (int j = k + 1; j <= min(n, k + m - 1); j++) {
+					if (j - i <= m && bdp[j] != infi) {
+						if (str[j - i - 1] == '1') {
+							ans = min(ans, fdp[i] + bdp[j] + 1);
+						}
+					}
+				}
+			}
+		}
+		if (ans == infi) v.push_back(-1);
+		else v.push_back(ans);
+	}
+
+	rep(i, v.size()) {
+		if (i == v.size() - 1) cout << v[i] << endl;
+		else cout << v[i] << " ";
+	}
 
 	return 0;
 }
