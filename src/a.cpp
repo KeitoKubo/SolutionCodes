@@ -110,12 +110,7 @@ const int MX = 2e5 + 2;
 int main() {
 	//(void)scanf("%d",& );
 	//(void)scanf("%d%d",& ,& );
-	string s; cin >> s;
-	int ans = -1;
-	rep(i, s.length()) {
-		if (s[i] >= 'A' && s[i] <= 'Z') { ans = i + 1; break; }
-	}
-	std::cout << ans << endl;
+	
 
 	return 0;
 }

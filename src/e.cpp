@@ -105,73 +105,12 @@ bool compare_by_b(pair<int, int> a, pair<int, int> b) {
 
 //---------------------------------------------------
 const int MX = 2e5 + 2;
-vector<int> e[MX];
-map<pii, bool> mp;
-map<pii, bool> mp2;
-int digin[MX];
-int used[MX];
-int node[MX];
-int a[MX];
-int n, m;
 
-int last = -1;
-int dfs(int s, int p) {
-	used[s] = true;
-	int depth = p;
-	if (depth == n - 1) {
-		last = n - 1; node[n - 1] = s; return n - 1;
-	}
-	for (int u : e[s]) {
-		pii P = make_pair(s, u);
-		if (!used[u] && !mp2[P]) {
-			int next = dfs(u, p + 1);
-			//dfsの値がn-1よりも小さいのなら、もう探索する必要がない
-			if (next < n - 1) {
-				mp2[P] = true; continue;
-			}
-			if (next >= depth) {
-				depth = next;
-				if (depth == n-1) {
-					if (mp[P]) { last--; node[last] = s; }
-				}
-			}
-		}
-	}
-    return depth;
-}
 
 int main() {
 	//(void)scanf("%d",& );
 	//(void)scanf("%d%d",& ,& );
-	cin >> n >> m;
-	rep(i, m) {
-		int x, y; (void)scanf("%d%d", &x, &y);
-		--x; --y;
-		if (!mp[make_pair(x, y)]) {
-			e[x].push_back(y); digin[y]++; mp[make_pair(x, y)] = true;
-		}
-	}
-
-	int p = 0;
-	int s = -1;
-	rep(i, n) {
-		if (digin[i] == 0) { p++; s = i; }
-	}
-
-
-	if (p > 1) { cout << "No" << endl; return 0; }
-	int max_depth = dfs(s, 0);
-	if (max_depth != n - 1) cout << "No" << endl;
-	else {
-		cout << "Yes" << endl;
-		rep(i, n) {
-			a[node[i]] = i + 1;
-		}
-		rep(i, n) {
-			if (i == n - 1) cout << a[i] << endl;
-			else cout << a[i] << " ";
-		}
-	}
+	
 
 	return 0;
 }

@@ -105,38 +105,12 @@ bool compare_by_b(pair<int, int> a, pair<int, int> b) {
 
 //---------------------------------------------------
 const int MX = 2e5 + 2;
-int a[MX], b[MX];
-ll c1[MX], c2[MX];
-int n;
+
 
 int main() {
 	//(void)scanf("%d",& );
 	//(void)scanf("%d%d",& ,& );
-	cin >> n;
-	rep(i, n) {
-		(void)scanf("%d%d", &a[i], &b[i]);
-	}
-
-	ll M = 998244353;
-	c1[0] = 1; c2[0] = 1;
-	for (int i = 1; i <= n - 1; i++) {
-		if (a[i - 1] != a[i]) {
-			c1[i] = (c1[i] + c1[i - 1]) % M;
-		}
-		if (a[i - 1] != b[i]) {
-			c2[i] = (c2[i] + c1[i - 1]) % M;
-		}
-		if (b[i - 1] != a[i]) {
-			c1[i] = (c1[i] + c2[i - 1]) % M;
-		}
-		if (b[i - 1] != b[i]) {
-			c2[i] = (c2[i] + c2[i - 1]) % M;
-		}
-	}
-
-	cout << (c1[n - 1] + c2[n - 1]) % M << endl;
-
-
+	
 
 	return 0;
 }

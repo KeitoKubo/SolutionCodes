@@ -110,19 +110,7 @@ const int MX = 2e5 + 2;
 int main() {
 	//(void)scanf("%d",& );
 	//(void)scanf("%d%d",& ,& );
-	int n; cin >> n;
-	vi a;
-	rep(i, 5*n) {
-		int x; cin >> x; a.push_back(x);
-	}
-	sort(a.begin(), a.end());
-
-	double ans = 0;
-	for (int i = n; i < 4 * n; i++) {
-		ans += (double)a[i];
-	}
-
-	cout << (ans / (double)(3 * n)) << endl;
+	
 
 	return 0;
 }

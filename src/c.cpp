@@ -110,31 +110,7 @@ const int MX = 2e5 + 2;
 int main() {
 	//(void)scanf("%d",& );
 	//(void)scanf("%d%d",& ,& );
-	int n; string s; cin >> n >> s;
-	map<pii, bool> mp;
-	bool flag = false;
-	int x = 0, y = 0;
-	mp[make_pair(0, 0)] = true;
-	rep(i, n) {
-		if (s[i] == 'R') {
-			++x;
-		}
-		if (s[i] == 'L') {
-			--x;
-		}
-		if (s[i] == 'U') {
-			++y;
-		}
-		if (s[i] == 'D') {
-			--y;
-		}
-		pii P = make_pair(x, y);
-		if (mp[P]) flag = true;
-		mp[P] = true;
-	}
-
-	if (flag) cout << "Yes" << endl;
-	else cout << "No" << endl;
+	
 
 	return 0;
 }
