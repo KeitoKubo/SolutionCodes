@@ -105,13 +105,41 @@ bool compare_by_b(pair<int, int> a, pair<int, int> b) {
 
 //---------------------------------------------------
 const int MX = 2e5 + 2;
-
+int d[301][301];
 
 int main() {
 	//(void)scanf("%d",& );
 	//(void)scanf("%d%d",& ,& );
+	int n, m; cin >> n >> m;
+	repa(i, n) { repa(j, n) d[i][j] = (i == j) ? 0 : 100000; }
+	rep(i, m) {
+		int t; cin >> t; vi vec(t);
+		rep(j, t) { (void)scanf("%d", &vec[j]); }
+		rep(j, t-1) {
+			for (int k = j + 1; k < t; k++) {
+				d[vec[j]][vec[k]] = d[vec[k]][vec[j]] = 1;
+			}
+		}
+	}
 
-	
+	repa(k, n) {
+		repa(i, n) {
+			repa(j, n) {
+				d[i][j] = min(d[i][j], d[i][k] + d[k][j]);
+			}
+		}
+	}
+
+	int ans = infi;
+	repa(i, n) {
+		int sum = 0;
+		repa(j, n) {
+			sum += d[i][j];
+		}
+		ans = min(ans, sum);
+	}
+	ans = ans * 100 / (n-1);
+	cout << ans << endl;
 
 	return 0;
 }

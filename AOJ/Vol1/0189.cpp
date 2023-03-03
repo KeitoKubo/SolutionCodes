@@ -111,7 +111,40 @@ int main() {
 	//(void)scanf("%d",& );
 	//(void)scanf("%d%d",& ,& );
 
-	
+	int n;
+	while (cin >> n, n) {
+		int d[11][11] = {};
+		for (int i = 0; i < 11; i++) rep(j, 11) d[i][j] = 100000;
+		for (int i = 0; i < 11; i++) d[i][i] = 0;
+		int max_city = 0;
+		for (int i = 0; i < n; i++) {
+			int x, y, z;
+			cin >> x >> y >> z;
+			d[x][y] = d[y][x] = z;
+			max_city = max(max_city, max(x, y));
+		}
+		for (int k = 0; k < max_city + 1; k++) {
+			for (int i = 0; i < max_city + 1; i++) {
+				for (int j = 0; j < max_city + 1; j++) {
+					if (d[i][j] != infi) {
+						d[i][j] = min(d[i][j], d[i][k] + d[k][j]);
+					}
+				}
+			}
+		}
+		int ans = infi, city = -1;
+		for (int i = 0; i < max_city + 1; i++) {
+			int sum = 0;
+			for (int j = 0; j < max_city + 1; j++) {
+				sum += d[i][j];
+				if (d[i][j] == 100000) { sum = infi; break; }
+			}
+			if (sum < ans) {
+				ans = sum; city = i;
+			}
+		}
+		cout << city << " " << ans << endl;
+	}
 
 	return 0;
 }

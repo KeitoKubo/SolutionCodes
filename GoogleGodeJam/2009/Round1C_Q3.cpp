@@ -110,8 +110,41 @@ const int MX = 2e5 + 2;
 int main() {
 	//(void)scanf("%d",& );
 	//(void)scanf("%d%d",& ,& );
+	int t; cin >> t;
+	rep(_case, t) {
+		int p, q; cin >> p >> q;
+		vi v(q + 2); v[0] = 0;
+		rep(i, q) {
+			(void)scanf("%d", &v[i + 1]);
+		}
+		v[q + 1] = p + 1;
+		vi vec;
+		rep(i, v.size() - 1) {
+			vec.push_back(v[i + 1] - 1 - v[i]);
+		}
 
-	
+		int ans = 0;
+		rep(k, q) {
+			int MN = infi, minpos = -1;
+			rep(i, vec.size()-1) {
+				if (vec[i] + vec[i+1] < MN) {
+					MN = vec[i] + vec[i + 1];
+					minpos = i;
+				}
+				else if (vec[i] + vec[i + 1] == MN) {
+					if (min(vec[minpos], vec[minpos + 1]) > min(vec[i], vec[i + 1])) {
+						MN = vec[i] + vec[i + 1];
+						minpos = i;
+					}
+				}
+			}
+			ans += MN;
+			vec[minpos + 1] = vec[minpos] + vec[minpos + 1] + 1;
+			vec.erase(vec.begin() + minpos);
+		}
+		printf("Case #%d: %d\n", _case + 1, ans);
+	}
+
 
 	return 0;
 }
