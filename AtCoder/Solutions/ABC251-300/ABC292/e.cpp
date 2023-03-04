@@ -104,13 +104,14 @@ bool compare_by_b(pair<int, int> a, pair<int, int> b) {
 }
 
 //---------------------------------------------------
-const int MX = 2e5 + 2;
-
+const int MX = 2001;
+bool a[MX][MX]; //iからjへの辺が存在するならtrue
+int n, m;
 
 int main() {
 	//(void)scanf("%d",& );
 	//(void)scanf("%d%d",& ,& );
-  
+	cin >> n >> m;
 
 	return 0;
 }

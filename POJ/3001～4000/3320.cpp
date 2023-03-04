@@ -44,74 +44,50 @@ typedef queue<int> qi;
 #define repa(i,n) for(int i=1;i<=(int)n;i++)
 #define irep(i,n) for(int i=(int)n-1;i>=0;i--)
 
-//Union Find Tree
-class DisjointSet {
-public:
-	vi rank, p, child; //rankはその木の深さ、pは親ノード
-
-	DisjointSet() {}
-	DisjointSet(int size) {
-		rank.resize(size + 1, 0);
-		p.resize(size + 1, 0);
-		child.resize(size + 1, 0);
-		repa(i, size) makeSet(i);
-	}
-
-	void makeSet(int x) {
-		p[x] = x;
-		rank[x] = 0;
-		child[x] = 1;
-	}
-
-	int findSet(int x) {
-		if (x != p[x]) p[x] = findSet(p[x]);
-		return p[x];
-	}
-
-	int howmanychilds(int x) {
-		return child[x];
-	}
-
-	bool same(int x, int y) {
-		if (findSet(x) == findSet(y)) return true;
-		else return false;
-	}
-
-	void link(int x, int y) {
-		if (rank[x] > rank[y]) {
-			p[y] = x;
-			child[x] += child[y];
-		}
-		else {
-			p[x] = y; child[y] += child[x];
-			if (rank[x] == rank[y]) rank[y]++;
-		}
-	}
-
-	void unite(int x, int y) {
-		link(findSet(x), findSet(y));
-	}
-};
-
-//sort vector<pii> by second element
-bool compare_by_b(pair<int, int> a, pair<int, int> b) {
-	if (a.second != b.second) {
-		return a.second < b.second;
-	}
-	else {
-		return a.first < b.first;
-	}
-}
 
 //---------------------------------------------------
-const int MX = 2e5 + 2;
-
+const int MX = 1e6 + 2;
+int a[MX];
+map<int, int> mp;
 
 int main() {
 	//(void)scanf("%d",& );
 	//(void)scanf("%d%d",& ,& );
-  
+	int n; cin >> n;
+	rep(i, n) (void)scanf("%d", &a[i]);
 
+	int m = 0;
+	rep(i, n) {
+		if (mp[a[i]] == 0) ++m;
+		mp[a[i]]++;
+	}
+
+	mp.clear();
+	int s = 0, t = 0; //find the first sufficient sequence
+	int u = 0;
+	rep(i, n) {
+		if (mp[a[i]] == 0)++u;
+		++mp[a[i]];
+		if (u == m) { t = i; break; }
+	}
+	rep(i, n) {
+		if (mp[a[i]] == 1) break;
+		--mp[a[i]]; ++s;
+	}
+	++t;
+	int ans = t - s;
+	while (1) {
+		while (s<n) { //element to read
+			if (--mp[a[s++]] == 0) break;
+		}
+		bool flag = false;
+		while (t < n) {
+			if (mp[a[t++]]++ == 0) { flag = true; break; }
+		}
+		if (flag) ans = min(ans, t - s + 1);
+		if (t == n) break;
+	}
+	cout << ans << endl;
 	return 0;
 }
 

@@ -110,7 +110,24 @@ const int MX = 2e5 + 2;
 int main() {
 	//(void)scanf("%d",& );
 	//(void)scanf("%d%d",& ,& );
-  
+	int a, b;
+	cin >> a >> b;
+	if (a == b) {
+		std::cout << std::fixed;
+		cout << std::setprecision(10) << (sqrt(6) - sqrt(2)) * (double)a << endl;
+		return 0;
+	}
+	double B = (double)max(a, b);
+	double A = (double)min(a, b);
+	if (sqrt(3) * B >= 2 * A) {
+		std::cout << std::fixed;
+		cout << std::setprecision(10) << A * 2 / sqrt(3) << endl;
+	}
+	else {
+		double C = 2 * B - sqrt(3) * A;
+		std::cout << std::fixed;
+		cout << std::setprecision(10) << sqrt(A * A + C * C) << endl;
+	}
 
 	return 0;
 }

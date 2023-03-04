@@ -110,7 +110,13 @@ const int MX = 2e5 + 2;
 int main() {
 	//(void)scanf("%d",& );
 	//(void)scanf("%d%d",& ,& );
-  
+  string s; cin>>s;
+	rep(i,s.length()){
+		char c = s[i];
+		c = c - ('a' - 'A');
+    s[i] = c;
+	}
+	cout<<s<<endl;
 
 	return 0;
 }

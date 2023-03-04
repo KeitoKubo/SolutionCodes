@@ -105,12 +105,42 @@ bool compare_by_b(pair<int, int> a, pair<int, int> b) {
 
 //---------------------------------------------------
 const int MX = 2e5 + 2;
+int c[MX];
 
+int f(int x) {
+	int y = x;
+	if (x == 1) return 1;
+	int ans = 1;
+	int g = 2;
+	while (y > 1 && g <= (int)sqrt(x)) {
+		if (y % g == 0) {
+			int p = 1;
+			while (y % g == 0) {
+				y /= g; p++;
+			}
+			ans *= p;
+		}
+		g++;
+	}
+	if (y == x) { // 素数
+		return 2;
+	}
+	if (y != 1) ans *= 2;
+	return ans;
+}
 
 int main() {
 	//(void)scanf("%d",& );
 	//(void)scanf("%d%d",& ,& );
-  
+	int n; cin >> n;
+	int sum = 0;
+	for (int i = 1; i <= n - 1; i++) {
+		c[i] = f(i);
+	}
+	for (int i = 1; i <= n - 1; i++) {
+		sum += c[i] * c[n - i];
+	}
+	cout << sum << endl;
 
 	return 0;
 }

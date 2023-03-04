@@ -105,13 +105,46 @@ bool compare_by_b(pair<int, int> a, pair<int, int> b) {
 
 //---------------------------------------------------
 const int MX = 2e5 + 2;
+vi e[MX];
+int used[MX];
+int n, m;
 
+bool bfs(int s) {
+	int node = 0, edge = 0;
+	qi Q; Q.push(s);
+	while (!Q.empty()) {
+		int x = Q.front(); Q.pop();
+		used[x] = true; ++node;
+		edge += e[x].size();
+		for (int y : e[x]) {
+			if (!used[y]) {
+				used[y] = true; Q.push(y);
+			}
+		}
+	}
+	if (node * 2 == edge) return true;
+	else return false;
+}
 
 int main() {
 	//(void)scanf("%d",& );
 	//(void)scanf("%d%d",& ,& );
-  
+	cin >> n >> m;
+	rep(i, m) {
+		int x, y; (void)scanf("%d%d", &x, &y);
+		--x; --y;
+		e[x].push_back(y);
+		e[y].push_back(x);
+	}
+	rep(i, n) used[i] = false;
+	rep(i, n) {
+		if (!used[i]) {
+			bool flag = bfs(i);
+			if (!flag) { cout << "No" << endl; return 0; }
+		}
+	}
 
+	cout << "Yes" << endl;
 	return 0;
 }
 

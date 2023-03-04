@@ -110,8 +110,22 @@ const int MX = 2e5 + 2;
 int main() {
 	//(void)scanf("%d",& );
 	//(void)scanf("%d%d",& ,& );
-  
-
+	int n, q; cin >> n >> q;
+	int a[101];
+	rep(i, 101) a[i] = 0;
+	rep(i, q) {
+		int x, y; cin >> x >> y;
+		if (x == 1) {
+			a[y]++;
+		}
+		else if (x == 2) {
+			a[y] += 2;
+		}
+		else {
+			if (a[y] >= 2) { cout << "Yes" << endl; }
+			else cout << "No" << endl;
+		}
+	}
 	return 0;
 }
 
