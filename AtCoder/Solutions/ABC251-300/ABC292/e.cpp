@@ -105,13 +105,47 @@ bool compare_by_b(pair<int, int> a, pair<int, int> b) {
 
 //---------------------------------------------------
 const int MX = 2001;
-bool a[MX][MX]; //iからjへの辺が存在するならtrue
+int connected[MX][MX];
+int node_exist[MX][MX];
+vector<int> e[MX];
 int n, m;
+
+void bfs(int s) { //O(N+M)
+	int checked[MX];
+	rep(i, n) checked[i] = false;
+	checked[s] = true;
+	qi Q; Q.push(s);
+	while (!Q.empty()) {
+		int x = Q.front(); Q.pop();
+		connected[s][x] = true;
+		for (int y : e[x]) {
+			if (!checked[y]) {
+				Q.push(y); checked[y] = true;
+			}
+		}
+	}
+}
 
 int main() {
 	//(void)scanf("%d",& );
 	//(void)scanf("%d%d",& ,& );
 	cin >> n >> m;
+	memset(connected, 0, sizeof(connected));
+	rep(i, m) {
+		int x, y; (void)scanf("%d%d", &x, &y);
+		--x; --y; e[x].push_back(y); node_exist[x][y] = true;
+	}
+	rep(i, n) bfs(i);
+
+	int ans = 0;
+	rep(i, n) {
+		rep(j, n) {
+			if (i != j && connected[i][j]) {
+				if (!node_exist[i][j]) ++ans;
+			}
+		}
+	}
+	cout << ans << endl;
 
 	return 0;
 }

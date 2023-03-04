@@ -112,22 +112,18 @@ int main() {
 	//(void)scanf("%d%d",& ,& );
 	int a, b;
 	cin >> a >> b;
-	if (a == b) {
-		std::cout << std::fixed;
-		cout << std::setprecision(10) << (sqrt(6) - sqrt(2)) * (double)a << endl;
-		return 0;
-	}
 	double B = (double)max(a, b);
 	double A = (double)min(a, b);
+	double ans;
 	if (sqrt(3) * B >= 2 * A) {
-		std::cout << std::fixed;
-		cout << std::setprecision(10) << A * 2 / sqrt(3) << endl;
+		ans = A * 2 / sqrt(3);
 	}
 	else {
 		double C = 2 * B - sqrt(3) * A;
-		std::cout << std::fixed;
-		cout << std::setprecision(10) << sqrt(A * A + C * C) << endl;
+		ans = sqrt(A * A + C * C);
 	}
+	std::cout << std::fixed;
+	cout << std::setprecision(10) << ans << endl;
 
 	return 0;
 }
