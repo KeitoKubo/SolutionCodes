@@ -1,0 +1,3 @@
+exec_on_contest_dir='ln -s ../.vscode ./.vscode && code .'
+[codestyle]
+template_file='~/atcoder-workspace/template.cpp'

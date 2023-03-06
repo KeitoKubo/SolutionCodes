@@ -48,7 +48,28 @@ const int MX = 2e5 + 2;
 int main() {
 	//(void)scanf("%d",& );
 	//(void)scanf("%d%d",& ,& );
-	
+	int n;
+	cin >> n;
+	vector<int> a(n), b(n);
+	rep(i, n) cin >> a[i];
+	rep(i, n) cin >> b[i];
+	reverse(a.begin(), a.end());
+
+	vector<int> sums(n);
+	rep(k, 5) {
+		vector<int> na(n), nb(n);
+		rep(i, n) {
+			na[i] = (~a[i] >> k) & 1;
+			nb[i] = (~b[i] >> k) & 1;
+		}
+		vector<int> c = atcoder::convolution(na, nb);
+		vector<int> d(n);
+		rep(i, c.size()) d[(i + 1) % n] += int(c[i] + 0.5);
+		rep(i, n) sums[i] += (n - d[i]) << k;
+	}
+
+	int ans = *max_element(sums.begin(), sums.end());
+	cout << ans << endl;
 
 
 	return 0;
