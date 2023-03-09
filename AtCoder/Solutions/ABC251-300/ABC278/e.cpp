@@ -1,10 +1,10 @@
-#define _USE_MATH_DEFINES
 #include <atcoder/all>
 #include <bits/stdc++.h>
 
 using namespace std;
 using namespace atcoder;
 
+typedef unsigned usi;
 typedef long long ll;
 typedef unsigned long long ull;
 typedef vector<int> vi;
@@ -15,8 +15,8 @@ typedef pair<int, int> pii;
 typedef pair<string, int> psi;
 typedef pair<int, string> pis;
 typedef set<int> si;
+typedef map<int, int> mii;
 typedef map<string, int> msi;
-typedef map<string, bool> msb;
 typedef priority_queue<int> pqi;
 typedef stack<int> sti;
 typedef queue<int> qi;
@@ -26,77 +26,66 @@ typedef complex<double> cmp;
 #define infl 9223372036854775806
 #define MOD  1000000007
 #define EPS 0.0000000001
-#define rep(i,n) for(int i=0;i<(int)n;i++)
-#define repa(i,n) for(int i=1;i<=(int)n;i++)
-#define irep(i,n) for(int i=(int)n-1;i>=0;i--)
-
-
-//sort vector<pii> by second element
-bool compare_by_b(pair<int, int> a, pair<int, int> b) {
-	if (a.second != b.second) {
-		return a.second < b.second;
-	}
-	else {
-		return a.first < b.first;
-	}
-}
+#define rep(i,n) for(int i = 0; i < (int)n; i++)
+#define repa(i,n) for(int i = 1; i <= (int)n; i++)
+#define irep(i,n) for(int i = (int)n - 1;i >= 0; i--)
+#define irepa(i,n) for(int i = (int)n; i >= 1; i--)
 
 //---------------------------------------------------
-const int MX = 302;
-int dp[MX][MX]; //solving problem at (i,j)
-int H, W, h, w, n;
-int g[MX][MX];
-map<int, int> mp;
+const unsigned MX = 2e5 + 2;
+
 
 int main() {
 	//(void)scanf("%d",& );
 	//(void)scanf("%d%d",& ,& );
-	(void)scanf("%d%d%d%d%d", &H, &W, &n, &h, &w);
-	int num = 0;
-	rep(i, H)rep(j, W) { 
-		(void)scanf("%d", &g[i][j]); 
-		if (mp[g[i][j]]++ == 0) ++num;
+	int H, W, N, h, w; std::cin >> H >> W >> N >> h >> w;
+	unordered_map<int, vector<pii>> mp;
+	int all = 0;
+	repa(i, H)repa(j, W) {
+		usi x; (void)scanf("%d", &x);
+		mp[x].emplace_back(i, j);
 	}
 
-	rep(i, h)rep(j, w) {
-		if (--mp[g[i][j]] == 0) --num;
-	}
-	dp[0][0] = num;
-	rep(j, W - w + 1)rep(i, H - h + 1) {
-		if (i == 0 && j == 0) continue;
-		int cur;
-		if (i == 0) {//recalculate
-			cur = dp[H - h][j - 1];
-			for (int y = H - h; y <= H - 1; y++) {
-				for (int x = j - 1; x <= j + w - 2; x++) {
-					if (mp[g[y][x]]++ == 0) ++cur;
-				}
-			}
-			for (int y = 0; y < h; y++) {
-				for (int x = j; x <= j + w - 1; x++) {
-					if (--mp[g[y][x]] == 0) --cur;
-				}
-			}
+	vector<vi> imosTable(H - h + 2, vi(W - w + 2));
+	rep(i, H - h + 2)rep(j, W - w + 2) {
+		imosTable[i][j] = 0;
+    }
+	for (auto [A,yx] : mp) {
+		//calculate [lx,rx) x [ly,ry) area which paints all Number-i grid
+		int lx = 0, rx = W - w + 1, ly = 0, ry = H - h + 1;
+		for (auto [y,x] : yx) {
+			lx = max(lx, x - w);
+			ly = max(ly, y - h);
+			rx = min(rx, x);
+			ry = min(ry, y);
 		}
-		else {//vertical dp
-			cur = dp[i - 1][j];
-			for (int x = j; x < j + w; x++) {
-				if (mp[g[i - 1][x]]++ == 0) ++cur;
-			}
-			for (int x = j; x < j + w; x++) {
-				if (--mp[g[i + h - 1][x]] == 0) --cur;
-			}
+		if (lx < rx && ly < ry) {
+			imosTable[ly][lx]++;
+			imosTable[ry][lx]--;
+			imosTable[ly][rx]--;
+			imosTable[ry][rx]++;
 		}
-		dp[i][j] = cur;
 	}
 
-	rep(i, H - h + 1) {
-		rep(j, W - w + 1) {
-			cout << dp[i][j] << " ";
+	//calculate cur-sum with imos-method
+	rep(y, H - h + 1) {
+		repa(x, W - w) {
+			imosTable[y][x] += imosTable[y][x - 1];
 		}
-		cout << endl;
 	}
-	
+	repa(y, H - h) {
+		rep(x, W - w + 1) {
+			imosTable[y][x] += imosTable[y - 1][x];
+		}
+	}
+
+	//print
+	rep(y, H - h + 1) {
+		rep(x, W - w + 1) {
+			cout << mp.size() - imosTable[y][x] << " ";
+		}
+		printf("\n");
+	}
 
 	return 0;
 }
