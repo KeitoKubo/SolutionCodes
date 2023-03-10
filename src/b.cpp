@@ -35,7 +35,7 @@ typedef complex<double> cmp;
 const unsigned MX = 2e5 + 2;
 
 
-unsigned main() {
+int main() {
 	//(void)scanf("%d",& );
 	//(void)scanf("%d%d",& ,& );
 	
