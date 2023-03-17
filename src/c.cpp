@@ -20,7 +20,6 @@ typedef map<string, int> msi;
 typedef priority_queue<int> pqi;
 typedef stack<int> sti;
 typedef queue<int> qi;
-typedef complex<double> cmp;
 
 #define infi 2147483647
 #define infl 9223372036854775806

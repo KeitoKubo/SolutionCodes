@@ -20,6 +20,7 @@ typedef map<string, int> msi;
 typedef priority_queue<int> pqi;
 typedef stack<int> sti;
 typedef queue<int> qi;
+typedef complex<double> cmp;
 
 #define infi 2147483647
 #define infl 9223372036854775806
@@ -32,18 +33,43 @@ typedef queue<int> qi;
 
 //---------------------------------------------------
 const unsigned MX = 2e5 + 2;
-
+const int MXN = 1e4;
+int dpx[MXN * 2 + 2];
+int dpy[MXN * 2 + 2];
 
 int main() {
-	//(void)scanf("%d",& );
-	//(void)scanf("%d%d",& ,& );
-	string s; cin >> s;
-	string str = "";
-	for (int i = 0; i <= s.length() - 2; i += 2) {
-		cout<<s[i+1]<<s[i];
+	int n; cin >> n;
+	int ax, ay; cin >> ax >> ay;
+	vi x, y;
+	rep(i, n) {
+		int p; (void)scanf("%d", &p);
+		if (i == 0) { dpx[MXN + p] = true; continue; }
+		if (i % 2 == 0) x.push_back(p);
+		else y.push_back(p);
 	}
-	cout << endl;
+	
+	bool flx = false, fly = false;
+	dpy[MXN] = true; //0→MXN, -MXN→0
+	for (int q : x) {
+		vi X;
+		rep(i, MXN * 2 + 2) {
+			if (dpx[i]) { dpx[i] = false; dpx[i - q] = true; X.push_back(i + q); }
+		}
+		for (int r : X) dpx[r] = true;
+	}
+	if (dpx[MXN + ax]) flx = true;
+
+	for (int q : y) {
+		vi Y;
+		rep(i, MXN * 2 + 2) {
+			if (dpy[i]) { dpy[i] = false; dpy[i - q] = true; Y.push_back(i + q); }
+		}
+		for (int r : Y) dpy[r] = true;
+	}
+	if (dpy[MXN + ay]) fly = true;
+
+	if (fly && flx) cout << "Yes" << endl;
+	else cout << "No" << endl;
 
 	return 0;
 }
-

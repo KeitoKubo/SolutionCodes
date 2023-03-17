@@ -20,7 +20,6 @@ typedef map<string, int> msi;
 typedef priority_queue<int> pqi;
 typedef stack<int> sti;
 typedef queue<int> qi;
-typedef complex<double> cmp;
 
 #define infi 2147483647
 #define infl 9223372036854775806
@@ -33,28 +32,16 @@ typedef complex<double> cmp;
 
 //---------------------------------------------------
 const unsigned MX = 2e5 + 2;
-int a[MX];
-int used[MX];
+
 
 int main() {
 	//(void)scanf("%d",& );
 	//(void)scanf("%d%d",& ,& );
-	vi vec;
-	int n; cin >> n;
-	repa(i, n) {
-		(void)scanf("%d", &a[i]);
+	string s; cin >> s;
+	string str = "";
+	for (int i = 0; i <= s.length() - 2; i += 2) {
+		cout<<s[i+1]<<s[i];
 	}
-	repa(i, n) {
-		if (!used[i]) {
-			used[a[i]] = true;
-		}
-	}
-	repa(i, n) {
-		if (!used[i]) vec.push_back(i);
-	}
-
-	cout << vec.size() << endl;
-	rep(i, vec.size()) cout << vec[i] << " ";
 	cout << endl;
 
 	return 0;
