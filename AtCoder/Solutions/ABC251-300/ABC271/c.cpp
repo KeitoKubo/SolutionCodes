@@ -20,6 +20,7 @@ typedef map<string, int> msi;
 typedef priority_queue<int> pqi;
 typedef stack<int> sti;
 typedef queue<int> qi;
+typedef complex<double> cmp;
 
 #define infi 2147483647
 #define infl 9223372036854775806
@@ -38,20 +39,33 @@ int main() {
 	//(void)scanf("%d",& );
 	//(void)scanf("%d%d",& ,& );
 	int n; cin >> n;
-	vi vec(n);
-	rep(i, n) (void)scanf("%d", &vec[i]);
+	std::map<int, int> mp; // detect more-than-one chapter
+	vi a(n), b(n);
+	rep(i, n) (void)scanf("%d", &a[i]);
+	if (n == 1 && a[0] != 1) { cout << 0 << endl; return 0; }
+	std:: sort(a.begin(), a.end());
+	std::copy(a.begin(), a.end(), b.begin());
+	b.erase(std::unique(b.begin(), b.end()), b.end());
 
-	if (n <= 1 && vec[0] != 1) { cout << 0 << endl; return 0; }
-	sort(vec.begin(), vec.end());
-	int p = 0, ans = 1, q = n;
-	while (p < q) {
-		if (vec[p] != ans) {
-			if (q - 2 < p) { --ans; break; }
-			q -= 2; ++ans;
-		}
-		else { ++p; ++ans; }
+	int rm = a.size() - b.size(); //num of duplicated books
+	int cur = 1;
+	while (rm >= 2) {
+		if (!mp.count(cur)) { rm -= 2; mp[cur] = 1; }
+		++cur;
 	}
-	cout << min(n, ans) << endl;
+	while (mp[cur] > 0) ++cur;
+	if (rm == 1) b.push_back(infi);
+	for (auto P : mp) mp[P.first] = 1;
+
+	auto ite = b.end();
+	while (true) {
+		if (mp.count(cur)) { ++cur; continue; }
+		if (ite == b.begin() || ite == (b.begin() + 1) || *(ite - 2) < cur) break;
+		mp[*(--ite)]--; mp[*(--ite)]--; mp[cur++]++;
+	}
+
+	if (!mp.count(cur)) --cur;
+	cout << cur << endl;
 
 	return 0;
 }
