@@ -17,14 +17,14 @@
             "name": "MinGW",
             "includePath": [
                 "${default}",
-                "C:\\MinGW\\include"
+                "C:/MinGW/include"
             ],
             "defines": [
                 "_DEBUG",
                 "UNICODE",
                 "_UNICODE"
             ],
-            "compilerPath": "C:\\MinGW\\bin\\gcc.exe",
+            "compilerPath": "C:/MinGW/bin/gcc.exe",
             "intelliSenseMode": "gcc-x64",
             "cppStandard": "c++17",
             "cStandard": "c11"

@@ -31,14 +31,46 @@ typedef queue<int> qi;
 #define irepa(i,n) for(int i = (int)n; i >= 1; i--)
 
 //---------------------------------------------------
-const unsigned MX = 2e5 + 2;
+const unsigned MX = 201;
+int n;
+ll d[MX][MX];
+ll x[MX], y[MX];
+ll p[MX];
 
 
 int main() {
 	//(void)scanf("%d",& );
 	//(void)scanf("%d%d",& ,& );
-	std::string hello = "Hello C++!";
-	puts( hello.c_str() );
+	cin >> n;
+	rep(i, n) {
+		(void)scanf("%lld%lld%lld", &x[i], &y[i], &p[i]);
+	}
+	rep(i, n) {
+		rep(j, n) {
+			ll dist = abs(x[i] - x[j]) + abs(y[i] - y[j]);
+			if (dist % p[i] == 0) { d[i][j] = dist / p[i]; }
+			else d[i][j] = dist / p[i] + 1;
+		}
+	}
+
+	//iからjへ移動するパスの中で、辺の最大値が最小になるものを見つける
+	rep(k, n) {
+		rep(i, n) {
+			rep(j, n) {
+				d[i][j] = min(d[i][j], max(d[i][k], d[k][j]));
+			}
+		}
+	}
+
+	ll ans = infl;
+	rep(i, n) {
+		ll cur = 0;
+		rep(j, n) {
+			cur = max(cur, d[i][j]);
+		}
+		ans = min(ans, cur);
+	}
+	cout << ans << endl;
 
 	return 0;
 }
