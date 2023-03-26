@@ -30,8 +30,6 @@ typedef queue<int> qi;
 #define irep(i,n) for(int i = (int)n - 1;i >= 0; i--)
 #define irepa(i,n) for(int i = (int)n; i >= 1; i--)
 
-//---------------------------------------------------
-const unsigned MX = 2005;
 using Mint = atcoder::modint998244353;
 
 vector<Mint> fact(MX);
@@ -67,52 +65,13 @@ Mint comb(int n, int k) {
 	return facts(n) * ifacts(k) * ifacts(n - k);
 }
 
+//---------------------------------------------------
+const unsigned MX = 2e5 + 2;
+
+
 int main() {
 	//(void)scanf("%d",& );
 	//(void)scanf("%d%d",& ,& );
-	int n, m, k; cin >> n >> m >> k;
-	vi a(n);
-	rep(i, n) (void)scanf("%d", &a[i]);
-	sort(a.begin(), a.end(), greater<int>());
-	int cnt = 0;
-	while (a.size() && a.back() == 0) {
-		(void)a.pop_back(); ++cnt;
-	}
-
-	fact[0] = Mint(1);
-	repa(i, m) {
-		fact[i] = fact[i - 1] * Mint(i);
-	}
-
-	vector<Mint> f(m + 1); //f[x] := x以下のものがK個未満であるような場合の数
-	rep(x, m + 1) {
-		f[x] = Mint(0);
-		int sum = 0; //x以下が既にいくつあるか
-		for (int na : a) if (na <= x) ++sum;
-		rep(i, cnt + 1) {
-			if (sum + i < k) { //x以下にするものの合計がk個未満である
-				/*
-				Mint now = fact[cnt];
-				now /= fact[i];
-				now /= fact[cnt - i];
-				*/
-				Mint now = comb(cnt, i);
-				now *= Mint(x).pow(i);
-				now *= Mint(m - x).pow(cnt - i);
-				f[x] += now;
-			}
-		}
-	}
-
-	Mint all = Mint(m).pow(cnt); //全事象の場合の数
-	Mint ans = Mint(0); 
-	repa(x, m) {
-		Mint now = f[x - 1] - f[x];
-		now *= Mint(x);
-		ans += now;
-	}
-	ans /= all;
-	cout << ans.val() << endl;
 
 	return 0;
 }
