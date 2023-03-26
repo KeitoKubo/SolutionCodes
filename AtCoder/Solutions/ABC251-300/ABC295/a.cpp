@@ -32,36 +32,20 @@ typedef queue<int> qi;
 
 //---------------------------------------------------
 const unsigned MX = 2e5 + 2;
-char g[21][21];
-char h[21][21];
+
 
 int main() {
 	//(void)scanf("%d",& );
 	//(void)scanf("%d%d",& ,& );
-	int r, c; cin >> r >> c;
-	rep(i, r) rep(j, c) cin >> g[i][j];
-	rep(i, r) rep(j, c) h[i][j] = g[i][j];
-
-	rep(i, r) rep(j, c) {
-		if (g[i][j] != '.' && g[i][j] != '#') {
-			int x = g[i][j] - '0';
-			for (int p = 0; p <= x; ++p) {
-				for (int q = 0; p + q <= x; ++q) { //たてにp、よこにq
-					if (i - p >= 0 && j - q >= 0) h[i-p][j-q] = '.';
-					if (i - p >= 0 && j + q < c) h[i - p][j + q] = '.';
-					if (i + p  < r && j + q < c) h[i + p][j + q] = '.';
-					if (i + p  < r && j - q >= 0) h[i + p][j - q] = '.';
-				}
-			}
-		}
+	int n; cin >> n;
+	bool flag = false;
+	rep(i, n) {
+		string s; cin >> s;
+		if (s == "and" || s == "not" || s == "that" || s == "the" || s == "you") flag = true;
 	}
+	if (flag) cout << "Yes" << endl;
+	else cout << "No" << endl;
 
-	rep(i, r) {
-		rep(j, c) {
-			cout << h[i][j];
-		}
-		cout << endl;
-	}
 
 	return 0;
 }

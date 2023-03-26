@@ -32,36 +32,39 @@ typedef queue<int> qi;
 
 //---------------------------------------------------
 const unsigned MX = 2e5 + 2;
-char g[21][21];
-char h[21][21];
+
 
 int main() {
 	//(void)scanf("%d",& );
 	//(void)scanf("%d%d",& ,& );
-	int r, c; cin >> r >> c;
-	rep(i, r) rep(j, c) cin >> g[i][j];
-	rep(i, r) rep(j, c) h[i][j] = g[i][j];
-
-	rep(i, r) rep(j, c) {
-		if (g[i][j] != '.' && g[i][j] != '#') {
-			int x = g[i][j] - '0';
-			for (int p = 0; p <= x; ++p) {
-				for (int q = 0; p + q <= x; ++q) { //たてにp、よこにq
-					if (i - p >= 0 && j - q >= 0) h[i-p][j-q] = '.';
-					if (i - p >= 0 && j + q < c) h[i - p][j + q] = '.';
-					if (i + p  < r && j + q < c) h[i + p][j + q] = '.';
-					if (i + p  < r && j - q >= 0) h[i + p][j - q] = '.';
-				}
-			}
+	string s; cin >> s;
+	int n = s.length();
+	vector<vector<int>> vec(n + 1, vector<int>(10));
+	rep(i, 10) vec[0][i] = 0;
+	repa(i, n) {
+		int c = s[i - 1] - '0';
+		rep(j, 10) {
+			vec[i][j] = vec[i - 1][j];
 		}
+		vec[i][c]++;
+		vec[i][c] %= 2;
 	}
 
-	rep(i, r) {
-		rep(j, c) {
-			cout << h[i][j];
+	vector<int> a(1 << 10);
+	rep(i, 1 << 10) a[i] = 0;
+	rep(i, n + 1) {
+		int x = 0;
+		rep(j, 10) {
+			x += (int)pow(2, j) * vec[i][j];
 		}
-		cout << endl;
+		++a[x];
 	}
+
+	ll ans = 0;
+	for (int x : a) {
+		ans += (ll)x * (ll)(x - 1) / 2;
+	}
+	cout << ans << endl;
 
 	return 0;
 }

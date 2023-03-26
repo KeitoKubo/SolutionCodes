@@ -31,14 +31,37 @@ typedef queue<int> qi;
 #define irepa(i,n) for(int i = (int)n; i >= 1; i--)
 
 //---------------------------------------------------
-const unsigned MX = 2e5 + 2;
-
+const unsigned MX = 2002;
+bool isexist[MX];
+using Mint = atcoder::modint998244353;
+Mint cmb(int a, int b) {
+	Mint x = Mint(1);
+	repa(i, a) x *= Mint(i);
+	repa(i, b) x /= Mint(i);
+	repa(i, a - b) x /= Mint(i);
+	return x;
+}
 
 int main() {
 	//(void)scanf("%d",& );
 	//(void)scanf("%d%d",& ,& );
-	
+	int n, k, m; cin >> n >> k >> m;
+	vi a(n);
+	int cnt = 0;
+	rep(i, n) {
+		cin >> a[i];
+		if (a[i] == 0) ++cnt;
+		isexist[a[i]] = true;
+	}
+	sort(a.begin(), a.end());
 
+	Mint ans = Mint(0);
+	repa(X, m) {
+		auto ite = lower_bound(a.begin(), a.end(), X);
+		int A = ite - a.begin(); //X未満の要素の個数
+		if (A > k) continue;
+
+	}
 
 	return 0;
 }
