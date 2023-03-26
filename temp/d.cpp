@@ -37,8 +37,6 @@ const unsigned MX = 2e5 + 2;
 int main() {
 	//(void)scanf("%d",& );
 	//(void)scanf("%d%d",& ,& );
-	
-
 
 	return 0;
 }

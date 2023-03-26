@@ -37,14 +37,6 @@ const unsigned MX = 2e5 + 2;
 int main() {
 	//(void)scanf("%d",& );
 	//(void)scanf("%d%d",& ,& );
-	int t; cin >> t;
-	rep(none, t) {
-		ll L, R, S; cin >> S >> L >> R;
-		--L;
-		string str = to_string(S);
-		int len = str.length(); //Sの桁数
-	}
-
 
 	return 0;
 }

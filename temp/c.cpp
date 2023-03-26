@@ -32,23 +32,11 @@ typedef queue<int> qi;
 
 //---------------------------------------------------
 const unsigned MX = 2e5 + 2;
-map<int, int> mp;
+
 
 int main() {
 	//(void)scanf("%d",& );
 	//(void)scanf("%d%d",& ,& );
-	int n; cin >> n;
-	rep(i, n) {
-		int x; (void)scanf("%d", &x); ++mp[x];
-	}
-
-	int ans = 0;
-	for (pii P : mp) {
-		int q = P.second;
-		if (q % 2 == 1) ans += (q - 1) / 2;
-		else ans += q / 2;
-	}
-	cout << ans << endl;
 
 	return 0;
 }
