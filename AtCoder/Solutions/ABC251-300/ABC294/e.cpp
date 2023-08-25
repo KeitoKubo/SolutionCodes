@@ -30,9 +30,10 @@ typedef queue<int> qi;
 #define irep(i,n) for(int i = (int)n - 1;i >= 0; i--)
 #define irepa(i,n) for(int i = (int)n; i >= 1; i--)
 
-using Mint = atcoder::modint998244353;
+const int MXint = 2e5;
 
-vector<Mint> fact(MX);
+using Mint = atcoder::modint998244353;
+vector<Mint> fact(MXint);
 struct modinv {
 	int n; vector<Mint> d;
 	modinv() : n(2), d({ 0,1 }) {}
@@ -66,14 +67,44 @@ Mint comb(int n, int k) {
 }
 
 //---------------------------------------------------
-const unsigned MX = 2e5 + 2;
-
 
 int main() {
 	//(void)scanf("%d",& );
 	//(void)scanf("%d%d",& ,& );
+	ll L; int n1, n2;
+	cin >> L >> n1 >> n2;
 
-	
+	vector<pair<int,ll>> v1(n1), v2(n2);
+	rep(i, n1) {
+		(void)scanf("%d%lld", &v1[i].first, &v1[i].second);
+	}
+	rep(i, n2) {
+		(void)scanf("%d%lld", &v2[i].first, &v2[i].second);
+	}
+
+	ll as, bs, at, bt, cura, curb;
+	as = bs = -1; at = v1[0].second - 1; bt = v2[0].second - 1;//今見ている始点と終点
+	cura = curb = 0; //注目している要素は何番目か
+
+	ll ans = 0;
+
+	while (true) {
+		int x = v1[cura].first, y = v2[curb].first;
+		if (x == y) {
+			ans += min(at, bt) - max(as, bs);
+		}
+		if (at >= bt) { //bを1つ進める
+			++curb; if (curb == n2) break;
+			bs = bt; bt = bs + v2[curb].second;
+		}
+		else { //aを1つ進める
+			++cura; if (cura == n1) break;
+			as = at; at = as + v1[cura].second;
+		}
+	}
+
+	cout << ans << endl;
+
 	return 0;
 }
 
